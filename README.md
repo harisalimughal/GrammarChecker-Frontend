@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# GrammarChecker Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**GrammarChecker Frontend** is a modern React-based web application that provides an intuitive interface for grammar, spelling, and style checking.  
+It connects to the GrammarChecker backend API for processing.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
+- Real-time grammar, spelling, and style checking
+- Clean and responsive UI
+- Connects to a Node.js/Express API
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🌐 Live Demo
+➡ [https://your-frontend.vercel.app](https://your-frontend.vercel.app)  
+*(Replace with your actual URL once deployed)*
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠️ Installation & Running Locally
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Follow these steps to get started:
 
-### `npm run build`
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/yourusername/grammarchecker-frontend.git
+cd grammarchecker-frontend
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2️⃣ Install dependencies
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3️⃣ Configure the Backend API URL
+By default, the app expects the backend API to be running at `http://localhost:5000`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To use a different backend URL, create a `.env` file in the `frontend` directory and add:
+```env
+REACT_APP_API_URL=http://your-backend-url:5000
+```
 
-### `npm run eject`
+### 4️⃣ Start the development server
+```bash
+npm start
+```
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🧪 Running Tests
+To run the test suite:
+```bash
+npm test
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🔑 Login Credentials (Demo)
 
-## Learn More
+| Username | Password |
+|-----------|----------|
+| `admin`   | `password` |
+| `user`    | `123456`  |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📦 Build for Production
+To create a production build:
+```bash
+npm run build
+```
+The optimized build will be in the `build/` folder.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🤝 Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📄 License
+[MIT](../LICENSE)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
