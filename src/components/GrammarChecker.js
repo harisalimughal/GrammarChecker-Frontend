@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { 
   LogOut, 
@@ -11,7 +11,8 @@ import {
   Eye,
   RotateCcw,
   X,
-  CheckCircle
+  CheckCircle,
+  Loader2
 } from 'lucide-react';
 import axios from 'axios';
 
@@ -57,58 +58,10 @@ const GrammarChecker = () => {
   const abortControllerRef = useRef(null);
 
   // Debounced text for live checking
-  const debouncedText = useDebounce(text, 100); // 1 second delay
+  const debouncedText = useDebounce(text, 10); 
 
-  // Update stats when text changes
-  useEffect(() => {
-    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-    const characters = text.length;
-    
-    setStats({
-      words,
-      characters,
-      errors: corrections.filter(c => !appliedCorrections.has(c.id)).length
-    });
-  }, [text, corrections, appliedCorrections]);
-
-  // Live grammar checking with more detailed logging
-  useEffect(() => {
-    console.log('Live check effect triggered:', {
-      debouncedTextLength: debouncedText.length,
-      lastCheckedTextLength: lastCheckedText.length,
-      textsEqual: debouncedText === lastCheckedText
-    });
-
-    if (!debouncedText.trim()) {
-      console.log('No text to check');
-      return;
-    }
-
-
-    // Only trigger live check if text is substantial (more than 10 characters)
-    if (debouncedText.trim().length < 10) {
-      console.log('Text too short for live check:', debouncedText.trim().length);
-      return;
-    }
-
-    console.log('Triggering live check for:', debouncedText.substring(0, 50) + '...');
-    performLiveCheck(debouncedText);
-  }, [debouncedText]);
-
-  // Close tooltip when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
-        setActiveTooltip(null);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Helper function to find word boundaries more reliably
-  const findWordBoundaries = (text, targetWord, approximateStart) => {
+  // Memoize findWordBoundaries to avoid dependency issues
+  const findWordBoundaries = React.useCallback((text, targetWord, approximateStart) => {
     // Try exact match first
     const exactIndex = text.indexOf(targetWord, Math.max(0, approximateStart - 10));
     if (exactIndex !== -1) {
@@ -140,9 +93,10 @@ const GrammarChecker = () => {
     }
 
     return null;
-  };
+  }, []);
 
-  const performLiveCheck = async (textToCheck) => {
+  // Memoize performLiveCheck to avoid unnecessary re-renders
+  const performLiveCheck = React.useCallback(async (textToCheck) => {
     // Cancel any ongoing request
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
@@ -253,7 +207,54 @@ const GrammarChecker = () => {
     } finally {
       setIsLiveChecking(false);
     }
-  };
+  }, [token, logout, findWordBoundaries]);
+
+  // Update stats when text changes
+  useEffect(() => {
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    const characters = text.length;
+    
+    setStats({
+      words,
+      characters,
+      errors: corrections.filter(c => !appliedCorrections.has(c.id)).length
+    });
+  }, [text, corrections, appliedCorrections]);
+
+  // Live grammar checking with more detailed logging
+  useEffect(() => {
+    console.log('Live check effect triggered:', {
+      debouncedTextLength: debouncedText.length,
+      lastCheckedTextLength: lastCheckedText.length,
+      textsEqual: debouncedText === lastCheckedText
+    });
+
+    if (!debouncedText.trim()) {
+      console.log('No text to check');
+      return;
+    }
+
+    // Only trigger live check if text is substantial (more than 10 characters)
+    if (debouncedText.trim().length < 10) {
+      console.log('Text too short for live check:', debouncedText.trim().length);
+      return;
+    }
+
+    console.log('Triggering live check for:', debouncedText.substring(0, 50) + '...');
+    performLiveCheck(debouncedText);
+  }, [debouncedText, lastCheckedText, performLiveCheck]);
+
+  // Close tooltip when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+        setActiveTooltip(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleTextChange = (e) => {
     const newText = e.target.value;
@@ -720,6 +721,31 @@ const GrammarChecker = () => {
                   {renderHighlightedText()}
                 </div>
 
+                {/* Live Check Status Indicator */}
+                {text.trim() && (
+                  <div className="live-check-status">
+                    {isLiveChecking ? (
+                      <div className="checking-indicator">
+                        <Loader2 className="spinning" size={14} />
+                        <span>Checking ...</span>
+                      </div>
+                    ) : text.trim().length >= 10 && lastCheckedText === text ? (
+                      <div className="checked-indicator">
+                        <CheckCircle className="check-icon" size={14} />
+                        <span>Text analyzed</span>
+                      </div>
+                    ) : text.trim().length < 10 ? (
+                      <div className="waiting-indicator">
+                        <span>Type more text for live checking...</span>
+                      </div>
+                    ) : (
+                      <div className="pending-indicator">
+                        <span>Waiting to check...</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Instructions */}
                 {corrections.filter(c => !appliedCorrections.has(c.id)).length > 0 && (
                   <div className="instructions">
@@ -767,6 +793,10 @@ const GrammarChecker = () => {
           </div>
         )}
       </main>
+
+      <style jsx>{`
+        
+      `}</style>
     </div>
   );
 };

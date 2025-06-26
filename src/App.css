@@ -1,4 +1,6 @@
-/* Reset and Base Styles */
+/* =========================
+   Reset and Base Styles
+   ========================= */
 * {
   margin: 0;
   padding: 0;
@@ -20,7 +22,9 @@ body {
   min-height: 100vh;
 }
 
-/* Color Variables */
+/* =========================
+   Color Variables
+   ========================= */
 :root {
   --primary: #667eea;
   --primary-dark: #5a67d8;
@@ -48,6 +52,9 @@ body {
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
+/* =========================
+   Error Highlighting Styles
+   ========================= */
 .error-highlight {
   cursor: pointer;
   border-radius: 2px;
@@ -68,6 +75,10 @@ body {
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
 }
 
+/*
+  .spelling-error and .grammar-error are used for both error highlights and legend colors.
+  The first definition is for error highlight background and border, the second (below) is for legend.
+*/
 .spelling-error {
   background-color: #fef2f2;
   border-bottom: 2px wavy #ef4444;
@@ -80,6 +91,9 @@ body {
   color: #d97706;
 }
 
+/*
+  Tooltip for error corrections
+*/
 .correction-tooltip {
   position: absolute;
   top: 100%;
@@ -109,127 +123,13 @@ body {
   transform: translateX(-50%) rotate(45deg);
 }
 
-.tooltip-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  border-bottom: 1px solid #f3f4f6;
-  background: #f9fafb;
-  border-radius: 8px 8px 0 0;
-}
-
-.error-type {
-  font-weight: 600;
-  font-size: 14px;
-  color: #374151;
-}
-
-.tooltip-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #6b7280;
-  padding: 4px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.tooltip-close:hover {
-  background-color: #e5e7eb;
-}
-
-.tooltip-content {
-  padding: 16px;
-}
-
-.suggestion-section {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  font-size: 14px;
-}
-
-.original-word {
-  color: #dc2626;
-  font-weight: 500;
-  background: #fef2f2;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-.arrow {
-  color: #6b7280;
-  font-weight: bold;
-}
-
-.suggested-word {
-  color: #059669;
-  font-weight: 500;
-  background: #f0fdf4;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-.explanation {
-  margin-bottom: 16px;
-  padding: 12px;
-  background: #f8fafc;
-  border-radius: 6px;
-  border-left: 3px solid #3b82f6;
-}
-
-.explanation p {
-  margin: 0;
-  font-size: 13px;
-  color: #475569;
-  line-height: 1.5;
-}
-
-.tooltip-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.apply-btn {
-  flex: 1;
-  background: #059669;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: background-color 0.2s;
-}
-
-.apply-btn:hover {
-  background: #047857;
-}
-
-.dismiss-btn {
-  background: #f3f4f6;
-  color: #6b7280;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.dismiss-btn:hover {
-  background: #e5e7eb;
-  color: #374151;
-}
-
-/* FIXED: Added proper text wrapping styles */
+/* =========================
+   Highlighted, Preview, and Clean Text
+   ========================= */
+/*
+  These classes are used for displaying the main text, preview, and clean output.
+  They share text wrapping and formatting styles.
+*/
 .highlighted-text,
 .preview-text,
 .clean-text {
@@ -247,6 +147,9 @@ body {
   white-space: pre-wrap;
 }
 
+/* =========================
+   Preview Section Styles
+   ========================= */
 .preview-container {
   min-height: 200px;
   max-height: 400px;
@@ -274,20 +177,9 @@ body {
   overflow-wrap: break-word;
 }
 
-.instructions {
-  margin-top: 12px;
-  padding: 12px;
-  background: #eff6ff;
-  border: 1px solid #dbeafe;
-  border-radius: 6px;
-}
-
-.instructions p {
-  margin: 0;
-  font-size: 14px;
-  color: #1e40af;
-}
-
+/* =========================
+   No Errors and Clean Text
+   ========================= */
 .no-errors {
   display: flex;
   flex-direction: column;
@@ -324,6 +216,9 @@ body {
   overflow-wrap: break-word;
 }
 
+/* =========================
+   Error Legend Styles
+   ========================= */
 .error-legend {
   display: flex;
   gap: 16px;
@@ -356,7 +251,9 @@ body {
   border-bottom: 2px solid #f59e0b;
 }
 
-/* Login Styles */
+/* =========================
+   Login Styles
+   ========================= */
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -945,6 +842,74 @@ body {
   color: var(--gray-700);
 }
 
+/* Loader */
+.live-check-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  margin-top: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.checking-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #3b82f6;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.checked-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #10b981;
+  background-color: #f0fdf4;
+  border: 1px solid #dcfce7;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.waiting-indicator {
+  color: #6b7280;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.pending-indicator {
+  color: #f59e0b;
+  background-color: #fffbeb;
+  border: 1px solid #fed7aa;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.check-icon {
+  color: #10b981;
+}
+
 /* Error Highlighting */
 .spelling-error {
   background: rgba(245, 101, 101, 0.2);
@@ -1207,4 +1172,6 @@ body {
   .demo-buttons {
     flex-direction: column;
   }
+
+  
 }
