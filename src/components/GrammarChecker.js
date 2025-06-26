@@ -793,10 +793,6 @@ const GrammarChecker = () => {
           </div>
         )}
       </main>
-
-      <style jsx>{`
-        
-      `}</style>
     </div>
   );
 };

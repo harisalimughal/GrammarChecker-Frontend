@@ -94,35 +94,265 @@ body {
 /*
   Tooltip for error corrections
 */
-.correction-tooltip {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  width: 280px;
-  z-index: 1000;
-  margin-top: 5px;
-}
+/* =========================
+   Correction Tooltip Styles
+   ========================= */
 
-.correction-tooltip::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-bottom: none;
-  border-right: none;
-  transform: translateX(-50%) rotate(45deg);
-}
-
+   .correction-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    width: 280px;
+    z-index: 1000;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .correction-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-bottom: none;
+    border-right: none;
+  }
+  
+  .tooltip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .error-type {
+    font-weight: 600;
+    color: #374151;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .tooltip-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    color: #6b7280;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tooltip-close:hover {
+    background: #e5e7eb;
+    color: #374151;
+  }
+  
+  .tooltip-content {
+    padding: 16px;
+  }
+  
+  .suggestion-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 8px;
+    background: #f3f4f6;
+    border-radius: 6px;
+  }
+  
+  .original-word {
+    font-weight: 500;
+    color: #dc2626;
+    background: #fef2f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 13px;
+  }
+  
+  .arrow {
+    color: #6b7280;
+    font-weight: bold;
+  }
+  
+  .suggested-word {
+    font-weight: 500;
+    color: #059669;
+    background: #f0fdf4;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 13px;
+  }
+  
+  .explanation {
+    margin-bottom: 16px;
+  }
+  
+  .explanation p {
+    color: #4b5563;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .tooltip-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .apply-btn,
+  .dismiss-btn {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  
+  .apply-btn {
+    background: #059669;
+    color: white;
+  }
+  
+  .apply-btn:hover {
+    background: #047857;
+    transform: translateY(-1px);
+  }
+  
+  .dismiss-btn {
+    background: #f3f4f6;
+    color: #6b7280;
+    border: 1px solid #d1d5db;
+  }
+  
+  .dismiss-btn:hover {
+    background: #e5e7eb;
+    color: #374151;
+    transform: translateY(-1px);
+  }
+  
+  /* =========================
+     Error Legend Styles (Complete)
+     ========================= */
+  .error-legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #f9fafb;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .legend-color {
+    width: 16px;
+    height: 12px;
+    border-radius: 2px;
+    border-bottom: 2px wavy;
+  }
+  
+  .legend-color.spelling {
+    background-color: #fef2f2;
+    border-bottom-color: #ef4444;
+  }
+  
+  .legend-color.grammar {
+    background-color: #fefbf2;
+    border-bottom-color: #f59e0b;
+  }
+  
+  /* =========================
+     Instructions and Status Indicators
+     ========================= */
+  .instructions {
+    margin-top: 12px;
+    padding: 12px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  
+  .instructions p {
+    margin: 0;
+    color: #1e40af;
+  }
+  
+  .live-check-status {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .checking-indicator {
+    background: #fef3c7;
+    color: #92400e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .checked-indicator {
+    background: #d1fae5;
+    color: #065f46;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .waiting-indicator,
+  .pending-indicator {
+    background: #f3f4f6;
+    color: #6b7280;
+  }
+  
+  .spinning {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .check-icon {
+    color: #059669;
+  }
 /* =========================
    Highlighted, Preview, and Clean Text
    ========================= */
