@@ -54,15 +54,6 @@ const Login = () => {
     }
   };
 
-  const demoCredentials = [
-    { username: 'admin', password: 'password' },
-    { username: 'user', password: '123456' }
-  ];
-
-  const fillDemoCredentials = (credentials) => {
-    setFormData(credentials);
-    setError('');
-  };
 
   return (
     <div className="login-container">
@@ -148,23 +139,7 @@ const Login = () => {
         </form>
 
         <div className="demo-section">
-          {/* <div className="demo-divider">
-            <span>Demo Credentials</span>
-          </div> */}
-          {/* <div className="demo-buttons">
-            {demoCredentials.map((cred, index) => (
-              <button
-                key={index}
-                type="button"
-                className="demo-button"
-                onClick={() => fillDemoCredentials(cred)}
-                disabled={isLoading}
-              >
-                <User size={16} />
-                {cred.username} / {cred.password}
-              </button>
-            ))}
-          </div> */}
+         
         </div>
       </div>
     </div>
